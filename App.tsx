@@ -1,0 +1,199 @@
+
+import React, { useState, useCallback, useEffect } from 'react';
+import { AppID, WindowState } from './types';
+import { SYSTEM_APPS, SOCIAL_LINKS } from './constants';
+import MenuBar from './components/MenuBar';
+import Dock from './components/Dock';
+import WindowManager from './components/WindowManager';
+
+const App: React.FC = () => {
+  const [windows, setWindows] = useState<WindowState[]>([]);
+  const [activeAppId, setActiveAppId] = useState<AppID | null>(null);
+  const [zIndexCounter, setZIndexCounter] = useState(10);
+  const [browserUrl, setBrowserUrl] = useState('https://www.google.com/search?igu=1');
+  
+  // System Modes
+  const [theme, setTheme] = useState<'light' | 'dark'>('dark');
+  const [viewMode, setViewMode] = useState<'desktop' | 'mobile'>('desktop');
+  const [terminalCommand, setTerminalCommand] = useState<string | null>(null);
+
+  const [wallpaper] = useState('https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&q=80&w=2560');
+
+  const openApp = useCallback((appId: AppID, title?: string, initialUrl?: string, autoCmd?: string) => {
+    if (initialUrl) setBrowserUrl(initialUrl);
+    if (autoCmd) setTerminalCommand(autoCmd);
+
+    setWindows(prev => {
+      const existing = prev.find(w => w.appId === appId);
+      if (existing) {
+        const newZ = zIndexCounter + 1;
+        setZIndexCounter(newZ);
+        setActiveAppId(appId);
+        if (appId === 'terminal' && autoCmd) setTerminalCommand(autoCmd);
+        return prev.map(w => w.appId === appId ? { ...w, isMinimized: false, zIndex: newZ } : w);
+      }
+
+      const appData = SYSTEM_APPS.find(a => a.id === appId);
+      const newZ = zIndexCounter + 1;
+      setZIndexCounter(newZ);
+      setActiveAppId(appId);
+
+      // Safe spawning logic
+      const spawnX = Math.max(80, Math.min(100 + (prev.length * 30), window.innerWidth - 600));
+      const spawnY = Math.max(60, Math.min(100 + (prev.length * 30), window.innerHeight - 500));
+
+      const isMobile = viewMode === 'mobile';
+
+      return [...prev, {
+        id: Math.random().toString(36).substr(2, 9),
+        appId,
+        title: title || appData?.name || 'New Window',
+        isOpen: true,
+        isMinimized: false,
+        isMaximized: false,
+        zIndex: newZ,
+        x: isMobile ? 50 : spawnX,
+        y: isMobile ? 80 : spawnY,
+        width: isMobile ? 320 : 850,
+        height: isMobile ? 500 : 600,
+      }];
+    });
+  }, [zIndexCounter, viewMode]);
+
+  const closeWindow = useCallback((id: string) => {
+    setWindows(prev => {
+      const remaining = prev.filter(w => w.id !== id);
+      if (remaining.length === 0) setActiveAppId(null);
+      return remaining;
+    });
+  }, []);
+
+  const minimizeWindow = useCallback((id: string) => {
+    setWindows(prev => prev.map(w => w.id === id ? { ...w, isMinimized: true } : w));
+  }, []);
+
+  const toggleMaximize = useCallback((id: string) => {
+    setWindows(prev => prev.map(w => {
+      if (w.id === id) {
+        if (w.isMaximized) {
+          return { ...w, isMaximized: false, ...(w.prevPos || { x: 100, y: 100, width: 800, height: 600 }) };
+        } else {
+          return { 
+            ...w, 
+            isMaximized: true, 
+            prevPos: { x: w.x, y: w.y, width: w.width, height: w.height },
+            x: 0, y: 0, width: window.innerWidth, height: window.innerHeight - 80 
+          };
+        }
+      }
+      return w;
+    }));
+  }, []);
+
+  const focusWindow = useCallback((id: string) => {
+    setZIndexCounter(prev => {
+      const newZ = prev + 1;
+      setWindows(wins => wins.map(w => {
+        if (w.id === id) {
+          setActiveAppId(w.appId);
+          return { ...w, zIndex: newZ, isMinimized: false };
+        }
+        return w;
+      }));
+      return newZ;
+    });
+  }, []);
+
+  const updateWindowPos = useCallback((id: string, x: number, y: number) => {
+    const clampedY = Math.max(32, y);
+    setWindows(prev => prev.map(w => w.id === id ? { ...w, x, y: clampedY } : w));
+  }, []);
+
+  const updateWindowSize = useCallback((id: string, width: number, height: number) => {
+      setWindows(prev => prev.map(w => w.id === id ? { ...w, width: Math.max(width, 200), height: Math.max(height, 150) } : w));
+  }, []);
+
+  const handleFreshStart = () => {
+    setWindows([]);
+    setActiveAppId(null);
+  };
+
+  const SidebarIcon = ({ icon, onClick, label, isLast }: any) => (
+    <div 
+      className={`group relative flex items-center justify-center w-12 h-12 mb-4 cursor-pointer rounded-xl transition-all 
+        ${isLast ? 'mt-auto bg-blue-600/20 border border-blue-500/30' : ''} 
+        ${theme === 'dark' ? 'hover:bg-white/10 text-white' : 'hover:bg-black/10 text-black'}`}
+      onClick={onClick}
+    >
+      <span className="text-2xl drop-shadow-md">{icon}</span>
+      <div className="absolute left-16 bg-black/80 text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-[10000]">
+        {label}
+      </div>
+    </div>
+  );
+
+  return (
+    <div 
+      className={`relative w-screen h-screen overflow-hidden bg-cover bg-center select-none flex items-center justify-center`} 
+      style={{ backgroundImage: `url(${wallpaper})` }}
+    >
+      <div className={`absolute inset-0 transition-colors duration-700 pointer-events-none ${theme === 'dark' ? 'bg-black/40' : 'bg-white/20'}`} />
+      
+      <div 
+        className={`relative h-full transition-all duration-500 flex flex-col items-center justify-center overflow-hidden
+          ${viewMode === 'mobile' ? 'w-[400px] border-[12px] border-black/90 rounded-[50px] shadow-[0_0_80px_rgba(0,0,0,0.6)] my-8 max-h-[85vh]' : 'w-full'}`}
+      >
+        <MenuBar 
+          activeApp={activeAppId || 'DeskOS'} 
+          theme={theme}
+          onFile={() => openApp('finder')}
+          onEdit={() => setTheme(prev => prev === 'light' ? 'dark' : 'light')}
+          onView={() => setViewMode(prev => prev === 'desktop' ? 'mobile' : 'desktop')}
+          onWindow={handleFreshStart}
+          onHelp={() => openApp('terminal', 'Help', undefined, 'help')}
+        />
+
+        {/* Floating Social Sidebar */}
+        <div className={`absolute top-12 left-4 w-16 h-[calc(100vh-180px)] backdrop-blur-md rounded-2xl border flex flex-col items-center py-6 shadow-2xl z-[9000] transition-colors duration-500
+          ${theme === 'dark' ? 'bg-white/5 border-white/10' : 'bg-black/5 border-black/10'}`}>
+          <SidebarIcon icon="🐙" onClick={() => window.open(SOCIAL_LINKS.github, '_blank')} label="GitHub" />
+          <SidebarIcon icon="🔗" onClick={() => window.open(SOCIAL_LINKS.linkedin, '_blank')} label="LinkedIn" />
+          <SidebarIcon icon="🌐" onClick={() => window.open(SOCIAL_LINKS.portfolio, '_blank')} label="Portfolio" />
+          <SidebarIcon icon="📧" onClick={() => window.location.href = `mailto:${SOCIAL_LINKS.email}`} label="Contact" />
+          
+          <div className={`mt-4 opacity-20 text-[10px] rotate-90 mb-4 whitespace-nowrap font-bold tracking-widest ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
+            DESK OS
+          </div>
+
+          <SidebarIcon icon="ℹ️" onClick={() => openApp('about')} label="About Project" isLast />
+        </div>
+
+        <main className="w-full h-full relative overflow-hidden">
+          <WindowManager 
+            windows={windows} 
+            closeWindow={closeWindow}
+            minimizeWindow={minimizeWindow}
+            toggleMaximize={toggleMaximize}
+            focusWindow={focusWindow}
+            updateWindowPos={updateWindowPos}
+            updateWindowSize={updateWindowSize}
+            openApp={openApp}
+            browserUrl={browserUrl}
+            terminalCommand={terminalCommand}
+            onCommandProcessed={() => setTerminalCommand(null)}
+            theme={theme}
+          />
+        </main>
+
+        <Dock 
+          openApp={openApp} 
+          activeApp={activeAppId} 
+          minimizedApps={windows.filter(w => w.isMinimized).map(w => w.appId)}
+          theme={theme}
+        />
+      </div>
+    </div>
+  );
+};
+
+export default App;
