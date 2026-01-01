@@ -1,20 +1,24 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# DeskOS
 
-# Run and deploy your AI Studio app
+DeskOS is a browser-hosted desktop environment — a personal workspace built entirely on the web.
 
-This contains everything you need to run your app locally.
+## What this is
+- A client-side desktop environment
+- Window manager, apps, file system
+- Built with React + Vite
+- Deployed on Cloudflare Pages
 
-View your app in AI Studio: https://ai.studio/apps/drive/1ojMAd-TAKZJIJgvd4471ZdUHnvhkf_yX
+## What this is NOT
+- Not an operating system kernel
+- No backend server
+- No persistent user accounts
 
-## Run Locally
+## Run locally
+npm install  
+npm run dev
 
-**Prerequisites:**  Node.js
+## Build
+npm run build
 
-
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## Deployment
+Cloudflare Pages with GitHub CI/CD

@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 import { VFS } from '../constants';
 import { FileNode, AppID } from '../types';
+import { toast } from "sonner";
+
 
 interface FinderProps {
   openApp: (id: AppID, title?: string) => void;
@@ -26,11 +28,13 @@ const Finder: React.FC<FinderProps> = ({ openApp }) => {
       setCurrentDir(VFS.children![0].children![0]);
     } else if (name === 'Recents') {
       // For demo, just show root users or keep current
-      alert("Recents is currently being indexed by FOSal.");
-    } else if (name === 'Downloads') {
-      alert("Downloads folder is empty.");
+      toast.message("Recents is currently being indexed by FOSal.");
+    } else if (name === 'Downloads') {toast("Downloads folder is empty", {
+      duration: 2000,
+    });
+    
     } else {
-      alert(`${name} location is offline.`);
+      toast.message(`${name} location is offline.`);
     }
   };
 

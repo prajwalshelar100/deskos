@@ -6,7 +6,6 @@ const TEMPLATES = {
   'HTML Boilerplate': {
     'index.html': '<html>\n  <head>\n    <title>FOSal Project</title>\n    <link rel="stylesheet" href="style.css">\n  </head>\n  <body>\n    <h1>New FOSal Application</h1>\n    <div id="root"></div>\n    <script src="script.js"></script>\n  </body>\n</html>',
     'style.css': 'body {\n  font-family: system-ui;\n  padding: 40px;\n  background: #f0f0f0;\n}',
-    'script.js': 'console.log("FOSal Runtime Started");'
   },
   'Portfolio Starter': {
     'index.html': '<div class="card">\n  <h1>Prajwal Shelar</h1>\n  <p>Software Engineer</p>\n</div>',

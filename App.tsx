@@ -5,6 +5,8 @@ import { SYSTEM_APPS, SOCIAL_LINKS } from './constants';
 import MenuBar from './components/MenuBar';
 import Dock from './components/Dock';
 import WindowManager from './components/WindowManager';
+import { toast } from 'sonner';
+import { Toaster } from "sonner";
 
 const App: React.FC = () => {
   const [windows, setWindows] = useState<WindowState[]>([]);
@@ -137,6 +139,7 @@ const App: React.FC = () => {
       className={`relative w-screen h-screen overflow-hidden bg-cover bg-center select-none flex items-center justify-center`} 
       style={{ backgroundImage: `url(${wallpaper})` }}
     >
+      
       <div className={`absolute inset-0 transition-colors duration-700 pointer-events-none ${theme === 'dark' ? 'bg-black/40' : 'bg-white/20'}`} />
       
       <div 
