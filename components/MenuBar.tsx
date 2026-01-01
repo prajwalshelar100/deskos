@@ -37,7 +37,7 @@ const MenuBar: React.FC<MenuBarProps> = ({ activeApp, theme, onFile, onEdit, onV
         <span className="font-bold capitalize tracking-tight opacity-90">{activeApp}</span>
         <div className="hidden md:flex space-x-5 ml-4 opacity-70 font-medium">
           <button onClick={onFile} className="hover:text-blue-500 transition-colors">File</button>
-          <button onClick={onEdit} className="hover:text-blue-500 transition-colors">Edit</button>
+          <button onClick={onEdit} className="hover:text-blue-500 transition-colors">Theme</button>
           <button onClick={onView} className="hover:text-blue-500 transition-colors">View</button>
           <button onClick={onWindow} className="hover:text-blue-500 transition-colors">Window</button>
           <button onClick={onHelp} className="hover:text-blue-500 transition-colors">Help</button>
