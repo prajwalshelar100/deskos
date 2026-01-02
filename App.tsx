@@ -99,7 +99,7 @@ useEffect(() => {
       openApp(
         'browser', 
         'Portfolio', 
-        'https://prajwalshelar.online',
+        'https://prajwalshelar100.github.io/',
       );
     }, 1200); // Slightly longer delay to ensure UI is stable
 

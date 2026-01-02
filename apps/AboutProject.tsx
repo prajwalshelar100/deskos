@@ -48,7 +48,7 @@ const AboutProject: React.FC = () => {
             <h2 className="text-3xl font-black">Prajwal Shelar</h2>
             <div className="mt-8 flex justify-center space-x-6">
                <a href="https://github.com/prajwalshelar100" target="_blank" className="text-xs font-bold text-blue-400 hover:text-white transition-colors underline decoration-blue-500/30 underline-offset-4">Source Code</a>
-               <a href="https://www.prajwalshelar.online/" target="_blank" className="text-xs font-bold text-blue-400 hover:text-white transition-colors underline decoration-blue-500/30 underline-offset-4">Portfolio</a>
+               <a href="https://prajwalshelar100.github.io" target="_blank" className="text-xs font-bold text-blue-400 hover:text-white transition-colors underline decoration-blue-500/30 underline-offset-4">Portfolio</a>
             </div>
           </div>
         </div>

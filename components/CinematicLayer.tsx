@@ -237,7 +237,7 @@ const CinematicLayer: React.FC<CinematicLayerProps> = ({ onComplete }) => {
             src={USER_PHOTO_URL} 
             alt="Prajwal Shelar" 
             className="w-full h-full object-cover  contrast-125 hover:grayscale-0 transition-all duration-700"
-            onError={(e) => { (e.target as HTMLImageElement).src = "https://www.prajwalshelar.online/profile.jpg"; }}
+            onError={(e) => { (e.target as HTMLImageElement).src = "https://prajwalshelar100.github.io/profile.jpg"; }}
           />
           <div className="absolute inset-0 bg-blue-500/10 mix-blend-color" />
         </div>
