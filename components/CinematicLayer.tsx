@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Mail, Linkedin, Github, Globe, MessageSquare } from 'lucide-react';
+import { Mail, Linkedin, Github, Globe, MessageSquare, LeafyGreen } from 'lucide-react';
 
 interface CinematicLayerProps {
   onComplete: () => void;
@@ -285,20 +285,47 @@ const CinematicLayer: React.FC<CinematicLayerProps> = ({ onComplete }) => {
       </div>
 
       {/* ACT 2: TECHNICAL ARSENAL */}
-<div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none px-6 z-50" style={getMotionProps(28, 58)}>
-  <h3 className="text-blue-500 font-mono text-xs tracking-[0.5em] mb-8 uppercase">Technical Arsenal</h3>
-  <div className="max-w-6xl grid grid-cols-1 md:grid-cols-3 gap-6">
-    {[
-      { title: "Languages", desc: "Java (Core/Adv), Python, C, JavaScript, SQL", icon: "⌨️" },
-      { title: "Frameworks", desc: "Spring Boot, Microservices, Spring Data JPA", icon: "⚙️" },
-      { title: "Environments", desc: "AWS, Azure, Linux (Arch/Kali), Docker/CI/CD", icon: "☁️" }
-    ].map((item, idx) => (
-      <div key={idx} className="bg-white/5 backdrop-blur-xl p-8 rounded-3xl border border-white/10 shadow-2xl">
-         <div className="text-4xl mb-4">{item.icon}</div>
-         <h2 className="text-xl font-black text-white mb-2 uppercase tracking-tighter">{item.title}</h2>
-         <p className="text-white/60 text-sm font-mono leading-relaxed">{item.desc}</p>
+<div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none px-4 md:px-6 z-50 overflow-y-auto" style={getMotionProps(28, 58)}>
+  <div className="max-w-5xl w-full flex flex-col items-center py-10 md:py-0">
+    <h3 className="text-blue-500 font-mono text-[10px] md:text-xs tracking-[0.4em] mb-6 md:mb-8 uppercase text-center">
+      Technical Arsenal
+    </h3>
+    
+    {/* Main Cards: Stacks on mobile, Grid on desktop */}
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 w-full">
+      {[
+        { title: "Languages", desc: "Java (Core/Adv), Python, C, SQL", icon: "⌨️" },
+        { title: "Frameworks", desc: "Spring Boot, Microservices, JPA", icon: "⚙️" },
+        { title: "Environments", desc: "AWS, Azure, Linux, Docker/CI/CD", icon: "☁️" }
+      ].map((item, idx) => (
+        <div key={idx} className="bg-white/5 backdrop-blur-xl p-5 md:p-8 rounded-2xl md:rounded-3xl border border-white/10 shadow-2xl">
+           <div className="text-2xl md:text-4xl mb-3 md:mb-4">{item.icon}</div>
+           <h2 className="text-lg md:text-xl font-black text-white mb-1 md:mb-2 uppercase tracking-tighter">{item.title}</h2>
+           <p className="text-white/60 text-[12px] md:text-sm font-mono leading-relaxed">{item.desc}</p>
+        </div>
+      ))}
+    </div>
+
+    {/* ACT 2: DOMAIN SPECIALIZATION (Clean & Non-Repetitive) */}
+<div className="mt-8 md:mt-12 w-full grid grid-cols-2 md:grid-cols-3 gap-y-6 md:gap-y-10 gap-x-4 md:gap-x-12 border-t border-white/10 pt-8 md:pt-10">
+  {[
+    { label: "Engineering", detail: "System Architecture" },
+    { label: "Intelligence", detail: "Predictive Modeling" },
+    { label: "Research", detail: "Spatio-Temporal Logic" },
+    { label: "Infrastructure", detail: "Scalable Cloud Ops" },
+    { label: "Security", detail: "Linux / Penetration" },
+    { label: "Optimization", detail: "Algorithmic Logic" }
+  ].map((spec, i) => (
+    <div key={i} className="flex flex-col group items-center md:items-start">
+      <div className="text-blue-500 font-mono text-[9px] md:text-[10px] tracking-[0.2em] uppercase mb-1 opacity-70 group-hover:opacity-100 transition-opacity">
+        {spec.label}
       </div>
-    ))}
+      <div className="text-white font-bold text-[11px] md:text-base tracking-tight uppercase leading-tight text-center md:text-left">
+        {spec.detail}
+      </div>
+    </div>
+  ))}
+</div>
   </div>
 </div>
 
@@ -355,25 +382,87 @@ const CinematicLayer: React.FC<CinematicLayerProps> = ({ onComplete }) => {
   </div>
 </div>
 
-      {/* FINAL TRANSITION */}
-      
-      <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/95 backdrop-blur-3xl z-[1000]" style={{ 
-        opacity: scrollPos > 96 ? (scrollPos - 96) / 4 : 0,
-        pointerEvents: scrollPos > 98 ? 'auto' : 'none'
-      }}>
-        <div className="text-center space-y-12">
-          <div className="w-24 h-24 md:w-32 md:h-32 bg-blue-600 rounded-[2.5rem] mx-auto flex items-center justify-center text-5xl shadow-[0_0_100px_rgba(37,99,235,0.6)] animate-bounce">
-            🛸
-          </div>
-          <h3 className="text-white text-5xl md:text-8xl font-black tracking-tighter uppercase">DeskOS<br/><span className="text-blue-500">INITIALIZED</span></h3>
-          <button 
-            onClick={onComplete}
-            className="px-16 py-6 bg-white text-black hover:bg-blue-600 hover:text-white rounded-full font-black text-sm uppercase tracking-[0.5em] transition-all transform hover:scale-110 active:scale-90"
-          >
-            Enter Workstation
-          </button>
-        </div>
+      {/* FINAL TRANSITION - Contact Tags Layout */}
+<div className="absolute inset-0 flex flex-col items-center justify-center bg-black/95 backdrop-blur-3xl z-[1000]" style={{ 
+  opacity: scrollPos > 96 ? (scrollPos - 96) / 4 : 0,
+  pointerEvents: scrollPos > 98 ? 'auto' : 'none'
+}}>
+  
+  {/* System Identity Tags */}
+  <InfoBlock position="top-left" opacity={1} label="System Metadata" scrollOffset={scrollPos}>
+    User: Prajwal Shelar<br/>
+    Host: DeskOS_v2.0.4<br/>
+    <span className="text-green-500">System Nominal</span>
+  </InfoBlock>
+
+  <InfoBlock position="top-right" opacity={1} label="Security" scrollOffset={scrollPos}>
+    Auth: Verified<br/>
+    <span className="text-green-500">Access Granted</span><br/>
+    ID: PS-9987-X
+  </InfoBlock>
+
+  {/* BOTTOM LEFT: Data Export (Size Matched to Uplinks) */}
+  <InfoBlock position="bottom-left" opacity={1} label="Data Export" scrollOffset={scrollPos}>
+    <div className="pointer-events-auto flex flex-col gap-1">
+      {/* File Label */}
+      <div className="text-[10px] opacity-40 lowercase mb-1 tracking-tighter">
+        PS_Resume_2024.pdf
       </div>
+
+      {/* The Download Link - Styled like your Uplinks */}
+      <a 
+        href="/PrajwalShelar_Resume.pdf" 
+        download="PrajwalShelar_Resume.pdf"
+        className="flex items-center gap-2 hover:text-blue-400 transition-colors group"
+      >
+        <span>Download CV</span>
+        <svg 
+          width="12" 
+          height="12" 
+          viewBox="0 0 24 24" 
+          fill="none" 
+          stroke="currentColor" 
+          strokeWidth="3" 
+          strokeLinecap="round" 
+          strokeLinejoin="round" 
+          className="opacity-50 group-hover:opacity-100 group-hover:translate-y-0.5 transition-all"
+        >
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v4" />
+          <polyline points="7 10 12 15 17 10" />
+          <line x1="12" y1="15" x2="12" y2="3" />
+        </svg>
+      </a>
+
+      {/* Security Status */}
+      <div className="text-[9px] text-green-500/60 mt-1 flex items-center gap-1.5 uppercase tracking-widest">
+        <span className="w-1 h-1 bg-green-500 rounded-full animate-pulse" />
+        Verified
+      </div>
+    </div>
+  </InfoBlock>
+
+  <InfoBlock position="bottom-right" opacity={1} label="Uplinks" scrollOffset={scrollPos}>
+    <div className="pointer-events-auto flex flex-col gap-1">
+      <a href="mailto:shelar.prajwal.99@gmail.com" target="_blank" className="hover:text-blue-400 transition-colors">Gmail</a>
+      <a href="https://github.com/prajwalshelar100" target="_blank" className="hover:text-blue-400 transition-colors">GitHub</a>
+      <a href="https://linkedin.com/in/prajwalshelar" target="_blank" className="hover:text-blue-400 transition-colors">LinkedIn</a>
+    </div>
+  </InfoBlock>
+
+  {/* Central Boot Button */}
+  <div className="text-center space-y-12">
+    <div className="w-24 h-24 md:w-32 md:h-32 bg-blue-600 rounded-[2.5rem] mx-auto flex items-center justify-center text-5xl shadow-[0_0_100px_rgba(37,99,235,0.6)] animate-pulse">
+      🛸
+    </div>
+    <h3 className="text-white text-5xl md:text-8xl font-black tracking-tighter uppercase">DeskOS</h3>
+    <button 
+      onClick={onComplete}
+      className="px-16 py-6 bg-white text-black hover:bg-blue-600 hover:text-white rounded-full font-black text-sm uppercase tracking-[0.5em] transition-all transform hover:scale-110 shadow-2xl"
+    >
+      Initialize Workstation
+    </button>
+  </div>
+</div>
 
       {/* HUD PROGRESS INDICATOR */}
       <div className="fixed right-6 md:right-10 top-1/2 -translate-y-1/2 flex flex-col items-center space-y-4 z-[200]">
