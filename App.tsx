@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { AppID, WindowState } from './types';
 import { SYSTEM_APPS, SOCIAL_LINKS } from './constants';
 import MenuBar from './components/MenuBar';
@@ -21,13 +21,17 @@ const App: React.FC = () => {
     'https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&q=80&w=2560'
   );
 
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && showIntro) setShowIntro(false);
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [showIntro]);
+    useEffect(() => {
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'Escape' && showIntro) setShowIntro(false);
+      };
+      window.addEventListener('keydown', handleKeyDown);
+      return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [showIntro]);
+      
+
+    
+
 
   const openApp = useCallback(
     (appId: AppID, title?: string, initialUrl?: string, autoCmd?: string) => {
@@ -78,6 +82,29 @@ const App: React.FC = () => {
     },
     [zIndexCounter, viewMode]
   );
+  // 1. Create a persistent "lock" that survives re-renders
+const hasTriggeredInit = useRef(false);
+
+useEffect(() => {
+  // 2. Check if intro is over AND if we haven't triggered this yet
+  if (!showIntro && !hasTriggeredInit.current) {
+    
+    // 3. Immediately lock it so no other render can enter this block
+    hasTriggeredInit.current = true;
+
+    console.log("OS Initialized: Opening Portfolio..."); // Debug check
+
+    const timer = setTimeout(() => {
+      openApp(
+        'browser', 
+        'Portfolio', 
+        'https://prajwalshelar.online',
+      );
+    }, 1200); // Slightly longer delay to ensure UI is stable
+
+    return () => clearTimeout(timer);
+  }
+}, [showIntro, openApp]);
 
   const closeWindow = useCallback((id: string) => {
     setWindows(prev => prev.filter(w => w.id !== id));
@@ -160,13 +187,17 @@ const App: React.FC = () => {
 
   const SidebarIcon = ({ icon, onClick, label, isLast }: any) => (
     <div
-      className={`group relative flex items-center justify-center w-10 md:w-12 h-10 md:h-12 mb-4 cursor-pointer rounded-xl transition-all 
-        ${isLast ? 'mt-auto bg-blue-600/20 border border-blue-500/30' : ''} 
+      className={`group relative flex items-center justify-center w-10 md:w-12 h-10 md:h-12 cursor-pointer rounded-xl transition-all 
+        /* Margin logic: No margin on mobile (row), mb-4 on desktop (col) */
+        md:mb-4 
+        ${isLast ? 'md:mt-auto bg-blue-600/20 border border-blue-500/30' : ''} 
         ${theme === 'dark' ? 'hover:bg-white/10 text-white' : 'hover:bg-black/10 text-black'}`}
       onClick={onClick}
     >
       <span className="text-xl md:text-2xl drop-shadow-md">{icon}</span>
-      <div className="absolute left-16 bg-black/80 text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-[10000]">
+      
+      {/* Tooltip logic: Bottom on mobile, Left-16 on desktop */}
+      <div className="absolute top-14 md:top-auto md:left-16 bg-black/80 text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-[10000]">
         {label}
       </div>
     </div>
@@ -211,8 +242,15 @@ const App: React.FC = () => {
 
         {/* Floating Social Sidebar */}
         <div
-          className={` md:flex absolute top-12 left-4 w-16 h-[calc(100vh-180px)] backdrop-blur-md rounded-2xl border flex-col items-center py-6 shadow-2xl z-[9000]
-            ${theme === 'dark' ? 'bg-white/5 border-white/10' : 'bg-black/5 border-black/10'}`}
+          className={`absolute backdrop-blur-md rounded-2xl border flex shadow-2xl z-[9000] transition-all duration-500
+            /* Mobile Styles: Horizontal bar at the top center */
+            top-10 left-1/2 -translate-x-1/2 w-[60%] h-14 flex-row justify-around items-center px-2
+            /* Desktop Styles (md): Vertical sidebar on the left */
+            md:top-12 md:left-4 md:translate-x-0 md:w-16 md:h-[calc(100vh-180px)] md:flex-col md:py-6 md:px-0 md:justify-start`}
+          style={{
+            backgroundColor: theme === 'dark' ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)',
+            borderColor: theme === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'
+          }}
         >
           <SidebarIcon icon="🐙" onClick={() => window.open(SOCIAL_LINKS.github, '_blank')} label="GitHub" />
           <SidebarIcon icon="🔗" onClick={() => window.open(SOCIAL_LINKS.linkedin, '_blank')} label="LinkedIn" />
