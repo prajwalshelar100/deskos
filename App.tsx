@@ -5,6 +5,7 @@ import MenuBar from './components/MenuBar';
 import Dock from './components/Dock';
 import WindowManager from './components/WindowManager';
 import CinematicLayer from './components/CinematicLayer';
+import { Github, Linkedin, Mail, Info, UserRound } from 'lucide-react';
 
 const App: React.FC = () => {
   const [showIntro, setShowIntro] = useState(true);
@@ -185,23 +186,26 @@ useEffect(() => {
     setActiveAppId(null);
   };
 
-  const SidebarIcon = ({ icon, onClick, label, isLast }: any) => (
-    <div
-      className={`group relative flex items-center justify-center w-10 md:w-12 h-10 md:h-12 cursor-pointer rounded-xl transition-all 
-        /* Margin logic: No margin on mobile (row), mb-4 on desktop (col) */
-        md:mb-4 
-        ${isLast ? 'md:mt-auto bg-blue-600/20 border border-blue-500/30' : ''} 
-        ${theme === 'dark' ? 'hover:bg-white/10 text-white' : 'hover:bg-black/10 text-black'}`}
-      onClick={onClick}
-    >
-      <span className="text-xl md:text-2xl drop-shadow-md">{icon}</span>
-      
-      {/* Tooltip logic: Bottom on mobile, Left-16 on desktop */}
-      <div className="absolute top-14 md:top-auto md:left-16 bg-black/80 text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-[10000]">
-        {label}
-      </div>
+const SidebarIcon = ({ icon, onClick, label, isLast }: any) => (
+  <div
+    className={`group relative flex items-center justify-center w-8 h-8 md:w-12 md:h-12 cursor-pointer rounded-xl transition-all 
+      md:mb-3 
+      ${isLast ? 'md:mt-auto bg-blue-600/20 border border-blue-500/30' : ''} 
+      ${theme === 'dark' ? 'hover:bg-white/10 text-white' : 'hover:bg-black/10 text-black'}`}
+    onClick={onClick}
+  >
+    {/* Centered Icon Container */}
+    <div className="flex items-center justify-center pointer-events-none">
+      {icon}
     </div>
-  );
+    
+    {/* 🏷️ Tooltip Fix: This moves the text out of the sidebar flow */}
+    <div className="absolute left-12 md:left-14 opacity-0 group-hover:opacity-100 transition-all duration-200 pointer-events-none
+                    bg-black/80 text-white text-[10px] px-2 py-1 rounded-md whitespace-nowrap translate-x-[-10px] group-hover:translate-x-0 z-[10001]">
+      {label}
+    </div>
+  </div>
+);
 
   if (showIntro) {
     return <CinematicLayer onComplete={() => setShowIntro(false)} />;
@@ -260,11 +264,40 @@ useEffect(() => {
     borderColor: theme === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'
   }}
 >
-          <SidebarIcon icon="🐙" onClick={() => window.open(SOCIAL_LINKS.github, '_blank')} label="GitHub" />
-          <SidebarIcon icon="🔗" onClick={() => window.open(SOCIAL_LINKS.linkedin, '_blank')} label="LinkedIn" />
-          <SidebarIcon icon="🌐" onClick={() => window.open(SOCIAL_LINKS.portfolio, '_blank')} label="Portfolio" />
-          <SidebarIcon icon="📧" onClick={() => (window.location.href = `mailto:${SOCIAL_LINKS.email}`)} label="Contact" />
-          <SidebarIcon icon="ℹ️" onClick={() => openApp('about')} label="About Project" isLast />
+     {/* GitHub - Using Lucide */}
+  <SidebarIcon 
+    icon={<Github size={20} strokeWidth={2} className="md:w-6 md:h-6" />} 
+    onClick={() => window.open(SOCIAL_LINKS.github, '_blank')} 
+    label="GitHub" 
+  />
+
+{/* LinkedIn - Using Lucide */}
+<SidebarIcon 
+    icon={<Linkedin size={20} strokeWidth={2} className="md:w-6 md:h-6 fill-current" />} 
+    onClick={() => window.open(SOCIAL_LINKS.linkedin, '_blank')} 
+    label="LinkedIn" 
+  />
+
+ {/* Gmail - Using Lucide */}
+ <SidebarIcon 
+    icon={<Mail size={20} strokeWidth={2} className="md:w-6 md:h-6" />} 
+    onClick={() => (window.location.href = `mailto:${SOCIAL_LINKS.email}`)} 
+    label="Contact" 
+  />
+
+  {/* Portfolio - User Icon */}
+  <SidebarIcon 
+    icon={<UserRound size={22} strokeWidth={2.5} className="text-blue-400 md:w-7 md:h-7" />} 
+    onClick={() => window.open(SOCIAL_LINKS.portfolio, '_blank')} 
+    label="My Portfolio" 
+  />
+{/* Info - Using Lucide */}
+<SidebarIcon 
+    icon={<Info size={20} strokeWidth={2} className="md:w-6 md:h-6" />} 
+    onClick={() => openApp('about')} 
+    label="About Project" 
+    isLast 
+  />
         </div>
 
         {/* 🔒 FIX #2: Window compositor is ABSOLUTE */}
