@@ -240,18 +240,26 @@ useEffect(() => {
           onHelp={() => openApp('terminal', 'Help', undefined, 'help')}
         />
 
-        {/* Floating Social Sidebar */}
-        <div
-          className={`absolute backdrop-blur-md rounded-2xl border flex shadow-2xl z-[9000] transition-all duration-500
-            /* Mobile Styles: Horizontal bar at the top center */
-            top-10 left-1/2 -translate-x-1/2 w-[60%] h-14 flex-row justify-around items-center px-2
-            /* Desktop Styles (md): Vertical sidebar on the left */
-            md:top-12 md:left-4 md:translate-x-0 md:w-16 md:h-[calc(100vh-180px)] md:flex-col md:py-6 md:px-0 md:justify-start`}
-          style={{
-            backgroundColor: theme === 'dark' ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)',
-            borderColor: theme === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'
-          }}
-        >
+/* Floating Social Sidebar */
+<div
+  className={`absolute backdrop-blur-md rounded-xl border flex shadow-2xl z-[9000] transition-all duration-500
+    /* 📱 Mobile Axis Controls */
+    top-8 left-1/4 -translate-x-1/2 
+    w-[240px]           /* Precise Width */
+    h-12              /* Precise Height (Smaller) */
+    flex-row justify-between items-center px-2
+    scale-90            /* Overall Scale Down for Mobile */
+    
+    /* 🖥️ Desktop Axis Controls (md) */
+    md:scale-100
+    md:top-12 md:left-4 md:translate-x-0 
+    md:w-16 md:h-[calc(100vh-180px)] 
+    md:flex-col md:py-6 md:px-0 md:justify-start md:rounded-2xl`}
+  style={{
+    backgroundColor: theme === 'dark' ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)',
+    borderColor: theme === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'
+  }}
+>
           <SidebarIcon icon="🐙" onClick={() => window.open(SOCIAL_LINKS.github, '_blank')} label="GitHub" />
           <SidebarIcon icon="🔗" onClick={() => window.open(SOCIAL_LINKS.linkedin, '_blank')} label="LinkedIn" />
           <SidebarIcon icon="🌐" onClick={() => window.open(SOCIAL_LINKS.portfolio, '_blank')} label="Portfolio" />
