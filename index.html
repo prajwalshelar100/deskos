@@ -8,49 +8,66 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        html, body, #root {
+          width: 100%;
+          height: 100%;
+          margin: 0;
+          padding: 0;
+          overflow: hidden; /* 🚨 CRITICAL */
+        }
+      
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            margin: 0;
-            overflow: hidden;
-            background: #000;
+          font-family: 'Inter', -apple-system, BlinkMacSystemFont,
+            "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+          background: #000;
         }
+      
         .glass {
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+          background: rgba(255, 255, 255, 0.2);
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
+          border: 1px solid rgba(255, 255, 255, 0.1);
         }
+      
         .glass-dark {
-            background: rgba(20, 20, 20, 0.7);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+          background: rgba(20, 20, 20, 0.7);
+          backdrop-filter: blur(30px);
+          -webkit-backdrop-filter: blur(30px);
+          border: 1px solid rgba(255, 255, 255, 0.05);
         }
+      
         .mac-shadow {
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+          box-shadow: 0 20px 50px rgba(0,0,0,0.5);
         }
+      
         ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
+          width: 8px;
+          height: 8px;
         }
+      
         ::-webkit-scrollbar-track {
-            background: transparent;
+          background: transparent;
         }
+      
         ::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
+          background: rgba(255, 255, 255, 0.2);
+          border-radius: 10px;
         }
+      
         ::-webkit-scrollbar-thumb:hover {
-            background: rgba(255, 255, 255, 0.3);
+          background: rgba(255, 255, 255, 0.3);
         }
+      
         @keyframes windowOpen {
-            from { transform: scale(0.95); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
+          from { transform: scale(0.95); opacity: 0; }
+          to { transform: scale(1); opacity: 1; }
         }
+      
         .animate-window-open {
-            animation: windowOpen 0.2s cubic-bezier(0, 0, 0.2, 1);
+          animation: windowOpen 0.2s cubic-bezier(0, 0, 0.2, 1);
         }
-    </style>
+      </style>
+      
 
 <link rel="stylesheet" href="/index.css">
 </head>
