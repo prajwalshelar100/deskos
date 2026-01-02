@@ -11,7 +11,7 @@ const InfoBlock: React.FC<{
   children: React.ReactNode;
   label?: string;
   scrollOffset: number;
-}> = ({ position, opacity, children, label, scrollOffset }) => {
+}> = ({ position, opacity, children, label, scrollOffset, interactive = false }) => {
   const posClasses = {
     'top-left': 'top-6 md:top-12 left-6 md:left-12 text-left',
     'top-right': 'top-6 md:top-12 right-6 md:right-12 text-right',
@@ -26,12 +26,11 @@ const InfoBlock: React.FC<{
 
   return (
     <div 
-      className={`fixed ${posClasses[position]} z-[100] pointer-events-none transition-all duration-700 ease-out`}
-      style={{ 
-        opacity, 
-        transform: `translateY(${translateY}px)`,
-      }}
-    >
+  className={`fixed ${posClasses[position]} z-[120] ${
+    interactive ? 'pointer-events-auto' : 'pointer-events-none'
+  } transition-all duration-700 ease-out`}
+  style={{ opacity, transform: `translateY(${translateY}px)` }}
+>
       <div className="bg-black/90 backdrop-blur-2xl p-4 md:p-6 rounded-xl border border-white/20 shadow-[0_0_30px_rgba(0,0,0,0.8)] min-w-[160px] md:min-w-[260px]">
         {label && (
           <div className="text-[10px] md:text-[11px] font-black text-blue-400 uppercase tracking-[0.4em] mb-2 border-b border-white/10 pb-2">
@@ -226,7 +225,31 @@ const CinematicLayer: React.FC<CinematicLayerProps> = ({ onComplete }) => {
         </div>
       </InfoBlock>
 
-  
+  {/* ACT 1: QUICK ACCESS – CLASSIC PORTFOLIO */}
+{scrollPos <= 25 && (
+  <InfoBlock
+    position="bottom-left"
+    opacity={getMotionProps(0, 25).opacity}
+    label="Quick Access"
+    interactive
+    scrollOffset={scrollPos}
+  >
+    <a
+      href="https://prajwalshelar100.github.io/"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="flex items-center gap-2 text-white/70 hover:text-blue-400 transition-colors"
+    >
+      <span>Open Classic Portfolio</span>
+      <span className="text-[10px] opacity-50">↗</span>
+    </a>
+    <div className="text-[9px] text-white/40 mt-1 font-mono">
+      Fast recruiter-friendly overview
+    </div>
+  </InfoBlock>
+)}
+
+
       
       <div 
         className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none transition-all duration-500" 
@@ -246,26 +269,49 @@ const CinematicLayer: React.FC<CinematicLayerProps> = ({ onComplete }) => {
           PRAJWAL<br/><span className="text-blue-500">SHELAR</span>
         </h1>
 
+
         {scrollPos < 5 && (
-  <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center z-[200] pointer-events-auto">
+  <div
+  className="
+    absolute
+    bottom-8
+    right-6
+    md:left-1/2
+    md:right-auto
+    md:-translate-x-1/2
+    flex
+    flex-col
+    items-center
+    z-[200]
+    pointer-events-auto
+  "
+>
+
   
   <div
-    className="
-      px-2 py-3
-      bg-blue-500/20
-      border border-blue-400/60
-      rounded-full
-      text-blue-300
-      font-mono
-      text-[15px]
-      tracking-[0.35em]
-      shadow-lg shadow-blue-500/30
-      backdrop-blur-sm
-      animate-bounce
-    "
-  >
-    SCROLL Down
-  </div>
+  className="
+    px-3
+    py-2
+    md:px-2
+    md:py-3
+    bg-blue-500/15
+    border
+    border-blue-400/40
+    rounded-full
+    text-blue-300
+    font-mono
+    text-[11px]
+    md:text-[15px]
+    tracking-[0.25em]
+    shadow-md
+    backdrop-blur-sm
+    animate-bounce
+  "
+>
+  <span className="hidden md:inline">SCROLL DOWN</span>
+  <span className="hidden md:hidden">↓</span>
+</div>
+
 
   <div
     className="
@@ -282,6 +328,7 @@ const CinematicLayer: React.FC<CinematicLayerProps> = ({ onComplete }) => {
 </div>
 
 )}
+
       </div>
 
       {/* ACT 2: TECHNICAL ARSENAL */}
@@ -383,10 +430,8 @@ const CinematicLayer: React.FC<CinematicLayerProps> = ({ onComplete }) => {
 </div>
 
       {/* FINAL TRANSITION - Contact Tags Layout */}
-<div className="absolute inset-0 flex flex-col items-center justify-center bg-black/95 backdrop-blur-3xl z-[1000]" style={{ 
-  opacity: scrollPos > 96 ? (scrollPos - 96) / 4 : 0,
-  pointerEvents: scrollPos > 98 ? 'auto' : 'none'
-}}>
+      {scrollPos > 96 && (
+<div className="absolute inset-0 flex flex-col items-center justify-center bg-black/95 backdrop-blur-3xl z-[1000]" >
   
   {/* System Identity Tags */}
   <InfoBlock position="top-left" opacity={1} label="System Metadata" scrollOffset={scrollPos}>
@@ -463,7 +508,41 @@ const CinematicLayer: React.FC<CinematicLayerProps> = ({ onComplete }) => {
     </button>
   </div>
 </div>
+)}
+          {/* Persistent Classic Portfolio HUD */}
+          {scrollPos > 25 && scrollPos < 96 && (
+        <a
+          href="https://prajwalshelar100.github.io/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="
+            fixed
+            bottom-6
+            left-6
+            z-[300]
+            pointer-events-auto
+            px-3
+            py-1.5
+            rounded-full
+            bg-white/5
+            border
+            border-white/10
+            text-white/40
+            text-[9px]
+            font-mono
+            uppercase
+            tracking-[0.25em]
+            backdrop-blur-md
+            hover:text-blue-400
+            hover:border-blue-400/40
+            transition-all
+          "
+        >
+          Classic
+        </a>
+      )}
 
+    
       {/* HUD PROGRESS INDICATOR */}
       <div className="fixed right-6 md:right-10 top-1/2 -translate-y-1/2 flex flex-col items-center space-y-4 z-[200]">
         {[5, 40, 70, 90, 100].map((stop, i) => (
@@ -474,6 +553,7 @@ const CinematicLayer: React.FC<CinematicLayerProps> = ({ onComplete }) => {
         ))}
       </div>
     </div>
+  
   );
 };
 
