@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Mail, Linkedin, Github, Globe, MessageSquare } from 'lucide-react';
 
 interface CinematicLayerProps {
   onComplete: () => void;
@@ -196,18 +197,36 @@ const CinematicLayer: React.FC<CinematicLayerProps> = ({ onComplete }) => {
     
       <div className="absolute inset-0 ... z-50" style={getMotionProps(0, 25)}></div>
       {/* ACT 1: IDENTITY */}
-      <InfoBlock position="top-left" opacity={getMotionProps(2, 25).opacity} label="Profile" scrollOffset={scrollPos}>
-        Prajwal Shelar<br/>Software Developer
+      
+      <InfoBlock position="top-left" opacity={getMotionProps(0, 25).opacity} label="Subject" scrollOffset={scrollPos}>
+        <div className="flex flex-col gap-1">
+          <div className="flex justify-between items-center gap-4">
+            <span className="text-white/50 text-[10px] font-mono">Prajwal Shelar</span>
+          </div>
+          <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+          <div className="flex justify-between items-center gap-4">
+            
+            <span className="text-blue-400 font-black">Software Developer</span>
+          </div>
+        </div>
       </InfoBlock>
-      <InfoBlock position="top-right" opacity={getMotionProps(2, 25).opacity} label="Status" scrollOffset={scrollPos}>
-        9.41 MCA<br/>FOSal v1.2
+
+      {/* ACADEMICS: Enhanced Visual Readout */}
+      <InfoBlock position="top-right" opacity={getMotionProps(0, 25).opacity} label="Academics" scrollOffset={scrollPos}>
+        <div className="flex flex-col gap-1">
+          <div className="flex justify-between items-center gap-4">
+            <span className="text-white/50 text-[10px] font-mono">MCA</span>
+            <span className="text-blue-400 font-black">9.41</span>
+          </div>
+          <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+          <div className="flex justify-between items-center gap-4">
+            <span className="text-white/50 text-[10px] font-mono">BSc</span>
+            <span className="text-blue-400 font-black">9.40</span>
+          </div>
+        </div>
       </InfoBlock>
-      <InfoBlock position="bottom-left" opacity={getMotionProps(2, 25).opacity} label="Status" scrollOffset={scrollPos}>
-        9.41 MCA<br/>FOSal v1.2
-      </InfoBlock>
-      <InfoBlock position="bottom-right" opacity={getMotionProps(2, 25).opacity} label="Status" scrollOffset={scrollPos}>
-        9.41 MCA<br/>FOSal v1.2
-      </InfoBlock>
+
+  
       
       <div 
         className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none transition-all duration-500" 
@@ -228,65 +247,116 @@ const CinematicLayer: React.FC<CinematicLayerProps> = ({ onComplete }) => {
         </h1>
 
         {scrollPos < 5 && (
-  <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center z-[100] pointer-events-auto">
-    <div className="px-6 py-3 bg-blue-600/20 border border-blue-500/50 rounded-full text-blue-400 font-mono text-[10px] tracking-[0.4em] animate-bounce">
-      SCROLL TO INITIATE
-    </div>
-    <div className="text-blue-500 mt-2 animate-pulse">↓</div>
+  <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center z-[200] pointer-events-auto">
+  
+  <div
+    className="
+      px-2 py-3
+      bg-blue-500/20
+      border border-blue-400/60
+      rounded-full
+      text-blue-300
+      font-mono
+      text-[15px]
+      tracking-[0.35em]
+      shadow-lg shadow-blue-500/30
+      backdrop-blur-sm
+      animate-bounce
+    "
+  >
+    SCROLL Down
   </div>
+
+  <div
+    className="
+      mt-3
+      text-blue-400
+      text-2xl
+      animate-pulse
+      drop-shadow-[0_0_6px_rgba(59,130,246,0.6)]
+    "
+  >
+    ↓
+  </div>
+
+</div>
+
 )}
       </div>
 
-      {/* ACT 2: ARCHIVES */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none px-6" style={getMotionProps(28, 58)}>
-        <div className="max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
-          {[
-            { title: "MCA Master's", desc: "Systems Programming & ML Architectures", icon: "🎓", sub: "DSCE Bengaluru" },
-            { title: "Physics Hons", desc: "Analytical grounding in mathematical systems", icon: "⚛️", sub: "Amity University" }
-          ].map((item, idx) => (
-            <div key={idx} className="bg-black/80 backdrop-blur-2xl p-8 md:p-12 rounded-[2rem] border border-white/20 shadow-2xl">
-               <div className="w-14 h-14 bg-blue-600 rounded-2xl flex items-center justify-center text-3xl mb-6">{item.icon}</div>
-               <h2 className="text-3xl md:text-5xl font-black text-white mb-2">{item.title}</h2>
-               <p className="text-blue-400 font-mono text-sm uppercase tracking-widest mb-4">{item.sub}</p>
-               <p className="text-white/70 text-sm md:text-lg font-medium">{item.desc}</p>
-            </div>
-          ))}
-        </div>
+      {/* ACT 2: TECHNICAL ARSENAL */}
+<div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none px-6 z-50" style={getMotionProps(28, 58)}>
+  <h3 className="text-blue-500 font-mono text-xs tracking-[0.5em] mb-8 uppercase">Technical Arsenal</h3>
+  <div className="max-w-6xl grid grid-cols-1 md:grid-cols-3 gap-6">
+    {[
+      { title: "Languages", desc: "Java (Core/Adv), Python, C, JavaScript, SQL", icon: "⌨️" },
+      { title: "Frameworks", desc: "Spring Boot, Microservices, Spring Data JPA", icon: "⚙️" },
+      { title: "Environments", desc: "AWS, Azure, Linux (Arch/Kali), Docker/CI/CD", icon: "☁️" }
+    ].map((item, idx) => (
+      <div key={idx} className="bg-white/5 backdrop-blur-xl p-8 rounded-3xl border border-white/10 shadow-2xl">
+         <div className="text-4xl mb-4">{item.icon}</div>
+         <h2 className="text-xl font-black text-white mb-2 uppercase tracking-tighter">{item.title}</h2>
+         <p className="text-white/60 text-sm font-mono leading-relaxed">{item.desc}</p>
       </div>
+    ))}
+  </div>
+</div>
 
-      {/* ACT 3: PATENT */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none px-6" style={getMotionProps(62, 82)}>
-        <div className="text-center space-y-6">
-           <div className="inline-block px-6 py-2 bg-blue-600 text-white text-xs font-black uppercase tracking-widest rounded-full shadow-[0_0_30px_rgba(59,130,246,0.5)]">Intellectual Property</div>
-           <h2 className="text-6xl md:text-9xl font-black text-white tracking-tighter">PATENT<br/>#118561</h2>
-           <p className="text-white/80 text-lg md:text-3xl max-w-3xl mx-auto font-light italic">
-             "Engineering <span className="text-blue-500 font-bold">spatio-temporal logic</span> for climate complexity analysis."
-           </p>
+      {/* ACT 3: INNOVATION & IP */}
+<div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none px-6 z-50" style={getMotionProps(62, 82)}>
+  <div className="text-center space-y-6">
+     <div className="inline-block px-6 py-2 bg-blue-600 text-white text-xs font-black uppercase tracking-widest rounded-full shadow-[0_0_30px_rgba(59,130,246,0.5)]">
+       Published Patent #118561
+     </div>
+     <h2 className="text-5xl md:text-8xl font-black text-white tracking-tighter uppercase">Spatio-Temporal<br/>Logic</h2>
+     <p className="text-white/80 text-lg md:text-2xl max-w-3xl mx-auto font-light italic">
+       "Automated System for Large-Scale Rainfall Analysis and Predictive Modeling."
+     </p>
+     <div className="pt-8 flex flex-col items-center">
+        <span className="text-blue-400 font-mono text-[10px] tracking-widest uppercase mb-4">Key Project</span>
+        <div className="bg-white/5 border border-white/10 p-4 rounded-lg backdrop-blur-md">
+          <p className="text-white font-bold text-sm">IMD Rainfall Analyzer (Python + LangChain + HuggingFace)</p>
         </div>
-      </div>
+     </div>
+  </div>
+</div>
 
-      {/* ACT 4: WORKFORCE */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none px-6" style={getMotionProps(80, 98)}>
-        <div className="max-w-3xl w-full space-y-8">
-           <h3 className="text-white text-4xl md:text-7xl font-black tracking-tighter uppercase text-center">Workforce Matrix</h3>
-           <div className="space-y-4">
-              {[
-                { role: "Research Intern", co: "DSCE MCA-VTU", year: "2024" },
-                { role: "Java Developer", co: "Motioncut", year: "2023" }
-              ].map((job, i) => (
-                <div key={i} className="flex justify-between items-center p-6 md:p-10 bg-black/60 border border-white/10 rounded-3xl backdrop-blur-md">
-                   <div>
-                      <span className="text-blue-500 font-black text-xs uppercase tracking-[0.3em] block mb-2">{job.role}</span>
-                      <span className="text-white text-xl md:text-3xl font-bold">{job.co}</span>
-                   </div>
-                   <span className="text-white/40 font-mono text-lg">{job.year}</span>
+      {/* ACT 4: WORKFORCE MATRIX */}
+<div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none px-6 z-50" style={getMotionProps(84, 98)}>
+  <div className="max-w-4xl w-full space-y-8">
+     <h3 className="text-white text-4xl md:text-6xl font-black tracking-tighter uppercase text-center mb-12">Professional Experience</h3>
+     <div className="space-y-6">
+        {[
+          { 
+            role: "Research Project Intern", 
+            co: "DSCE MCA-VTU", 
+            details: "Spatio-temporal analysis on IMD rainfall data using xarray & geopandas.",
+            date: "Apr - July 2024" 
+          },
+          { 
+            role: "Java Developer Intern", 
+            co: "Motioncut", 
+            details: "Full Stack development utilizing Spring, JDBC, and EJB architectures.",
+            date: "Nov - Dec 2023" 
+          }
+        ].map((job, i) => (
+          <div key={i} className="group p-8 bg-gradient-to-r from-white/5 to-transparent border-l-2 border-blue-500 rounded-r-3xl backdrop-blur-md">
+             <div className="flex justify-between items-start mb-2">
+                <div>
+                  <h4 className="text-blue-500 font-black text-xs uppercase tracking-[0.3em]">{job.role}</h4>
+                  <h5 className="text-white text-2xl font-bold">{job.co}</h5>
                 </div>
-              ))}
-           </div>
-        </div>
-      </div>
+                <span className="text-white/30 font-mono text-sm">{job.date}</span>
+             </div>
+             <p className="text-white/60 text-sm mt-2 font-light">{job.details}</p>
+          </div>
+        ))}
+     </div>
+  </div>
+</div>
 
       {/* FINAL TRANSITION */}
+      
       <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/95 backdrop-blur-3xl z-[1000]" style={{ 
         opacity: scrollPos > 96 ? (scrollPos - 96) / 4 : 0,
         pointerEvents: scrollPos > 98 ? 'auto' : 'none'
