@@ -10,13 +10,23 @@ export const SOCIAL_LINKS = {
 
 export const PROJECTS: Project[] = [
   {
+    id: 'deskos',
+    name: 'DeskOS',
+    tagline: 'A browser-hosted desktop environment for tools, experiments, and systems.',
+    description: 'Designed and built a client-side desktop environment that runs entirely in the browser, featuring a window manager, application runtime, virtual file system, and OS-like interaction patterns. DeskOS serves as a personal workspace for building tools, showcasing projects, and experimenting with system-level abstractions.',
+    tech: ['React', 'TypeScript', 'Vite', 'Web APIs', 'Cloudflare Pages'],
+    githubUrl: 'https://github.com/prajwalshelar100/deskos',
+    image: 'deskos.png'
+  },
+ 
+  {
     id: 'imd-rainfall',
     name: 'IMD Rainfall Analyzer',
-    tagline: 'Deep spatio-temporal analysis of Indian monsoon data.',
-    description: 'Developed an automated tool to analyze and visualize IMD rainfall data, integrating statistical analysis and custom modules. Patent pending research.',
+    tagline: 'Deep predictive and spatio-temporal analysis of Indian monsoon data.',
+    description: 'Developed an automated tool to analyze and visualize IMD rainfall data, integrating statistical analysis and custom modules. Patented research.',
     tech: ['Python', 'Pandas', 'Matplotlib', 'Scikit-Learn', 'Tkinter'],
-    githubUrl: 'https://github.com/prajwalshelar100/rainfall-analyzer',
-    image: 'https://images.unsplash.com/photo-1534274988757-a28bf1f539cf?auto=format&fit=crop&q=80&w=800'
+    githubUrl: 'https://github.com/prajwalshelar100/imd-rainfall-analyzer',
+    image: 'https://prajwalshelar100.github.io/IMDRA.png'
   },
   {
     id: 'image-recognition',
@@ -24,8 +34,8 @@ export const PROJECTS: Project[] = [
     tagline: 'Face detection and automatic capture system.',
     description: 'A Java-based system capable of detecting faces and automatically capturing images using Computer Vision (OpenCV).',
     tech: ['Java', 'Swing', 'OpenCV', 'JDBC'],
-    githubUrl: 'https://github.com/prajwalshelar100/',
-    image: 'https://images.unsplash.com/photo-1507146426996-ef05306b995a?auto=format&fit=crop&q=80&w=800'
+    githubUrl: 'https://github.com/prajwalshelar100/opencv-microservice',
+    image: 'https://prajwalshelar100.github.io/AFRICS.png'
   }
 ];
 

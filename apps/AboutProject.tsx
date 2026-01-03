@@ -13,7 +13,7 @@ const AboutProject: React.FC = () => {
 
         <div className="space-y-6 text-neutral-400 leading-relaxed">
           <p className="text-lg text-white/80 font-medium">
-            DeskOS (Desktop Operating System) is a high-fidelity browser-hosted environment designed to showcase systems-oriented frontend architecture.
+            DeskOS (Desktop Operating System) is a high-fidelity browser-hosted environment designed as a portfolio and to showcase systems-oriented frontend architecture .
           </p>
           
           <div className="grid grid-cols-2 gap-8 py-4">

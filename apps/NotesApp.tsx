@@ -12,21 +12,30 @@ const INITIAL_NOTES: Note[] = [
   {
     id: '1',
     title: 'About FOSal',
-    date: 'April 2024',
+    date: 'Dec 2025',
     content: "FOSal (Frontend OS Abstraction Layer) is a web-based operating system designed to showcase my skills as a software engineer. It's a living workspace built with React and systems-level thinking."
   },
   {
-    id: '2',
-    title: 'Career Goals',
-    date: 'May 2024',
-    content: "1. Build scalable backend architectures.\n2. Refine machine learning models for climate data.\n3. Create robust developer tools."
-  },
-  {
-    id: '3',
-    title: 'Technical Stack',
-    date: 'June 2024',
-    content: "Core: Java, Spring Boot, Python, React, TypeScript.\nSpecialties: Systems Programming, Computer Vision, Data Analysis."
-  }
+  id: '2',
+  title: 'Career Goals',
+  date: 'Dec 2025',
+  content: 
+    "1. Grow as an efficient and skilled software developer.\n" +
+    "2. Build robust automation tools.\n" +
+    "3. Build scalable and useful applications.\n" +
+    "4. Contribute to open source.\n" +
+    "5. Create robust developer tools.\n" +
+    "6. Solve real-world problems."
+},
+{
+  id: '3',
+  title: 'Technical Stack',
+  date: 'June 2024',
+  content:
+    "Core: Java, Spring Boot, Python, React, TypeScript.\n" +
+    "Specialties: Full-stack development, systems programming, computer vision, AI/ML."
+}
+ 
 ];
 
 const NotesApp: React.FC = () => {
