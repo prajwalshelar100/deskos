@@ -334,7 +334,7 @@ const CinematicLayer: React.FC<CinematicLayerProps> = ({ onComplete }) => {
       {/* ACT 2: TECHNICAL ARSENAL */}
 <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none px-4 md:px-6 z-50 overflow-y-auto" style={getMotionProps(28, 58)}>
   <div className="max-w-5xl w-full flex flex-col items-center py-10 md:py-0">
-    <h3 className="text-blue-500 font-mono text-[10px] md:text-xs tracking-[0.4em] mb-6 md:mb-8 uppercase text-center">
+    <h3 className="text-blue-400 font-#020202 text-[12px] md:text-2xl tracking-[0.4em] mb-6 md:mb-8 uppercase text-center">
       Technical Arsenal
     </h3>
     
@@ -356,13 +356,14 @@ const CinematicLayer: React.FC<CinematicLayerProps> = ({ onComplete }) => {
     {/* ACT 2: DOMAIN SPECIALIZATION (Clean & Non-Repetitive) */}
 <div className="mt-8 md:mt-12 w-full grid grid-cols-2 md:grid-cols-3 gap-y-6 md:gap-y-10 gap-x-4 md:gap-x-12 border-t border-white/10 pt-8 md:pt-10">
   {[
-    { label: "Engineering", detail: "System Architecture" },
-    { label: "Intelligence", detail: "Predictive Modeling" },
-    { label: "Research", detail: "Spatio-Temporal Logic" },
-    { label: "Infrastructure", detail: "Scalable Cloud Ops" },
-    { label: "Security", detail: "Linux / Penetration" },
-    { label: "Optimization", detail: "Algorithmic Logic" }
-  ].map((spec, i) => (
+  { label: "Engineering", detail: "Application & System Design" },
+  { label: "Data & AI", detail: "Predictive Modeling" },
+  { label: "Research", detail: "Spatio-Temporal Analysis" },
+  { label: "Backend", detail: "Java & API Development" },
+  { label: "Systems", detail: "Linux & OS Fundamentals" },
+  { label: "Problem Solving", detail: "Algorithms & Data Structures" }
+]
+.map((spec, i) => (
     <div key={i} className="flex flex-col group items-center md:items-start">
       <div className="text-blue-500 font-mono text-[9px] md:text-[10px] tracking-[0.2em] uppercase mb-1 opacity-70 group-hover:opacity-100 transition-opacity">
         {spec.label}
