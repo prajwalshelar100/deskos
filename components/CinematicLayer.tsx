@@ -235,7 +235,7 @@ const CinematicLayer: React.FC<CinematicLayerProps> = ({ onComplete }) => {
     scrollOffset={scrollPos}
   >
     <a
-      href="https://prajwalshelar100.github.io/"
+      href="https://prajwalshelar-portfolio.vercel.app/"
       target="_blank"
       rel="noopener noreferrer"
       className="flex items-center gap-2 text-white/70 hover:text-blue-400 transition-colors"
@@ -513,7 +513,7 @@ const CinematicLayer: React.FC<CinematicLayerProps> = ({ onComplete }) => {
           {/* Persistent Classic Portfolio HUD */}
           {scrollPos > 25 && scrollPos < 96 && (
         <a
-          href="https://prajwalshelar100.github.io/"
+          href="https://prajwalshelar-portfolio.vercel.app/"
           target="_blank"
           rel="noopener noreferrer"
           className="

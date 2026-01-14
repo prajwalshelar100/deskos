@@ -4,7 +4,7 @@ import { FileNode, Project } from './types';
 export const SOCIAL_LINKS = {
   linkedin: 'https://www.linkedin.com/in/prajwalshelar/',
   github: 'https://github.com/prajwalshelar100',
-  portfolio: 'https://prajwalshelar100.github.io/',
+  portfolio: 'https://prajwalshelar-portfolio.vercel.app/',
   email: 'shelar.prajwal.99@gmail.com'
 };
 

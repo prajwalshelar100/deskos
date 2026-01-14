@@ -99,7 +99,7 @@ useEffect(() => {
       openApp(
         'browser', 
         'Portfolio', 
-        'https://prajwalshelar100.github.io/',
+        'https://prajwalshelar-portfolio.vercel.app/',
       );
     }, 1200); // Slightly longer delay to ensure UI is stable
 
